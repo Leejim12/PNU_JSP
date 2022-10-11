@@ -3,12 +3,15 @@
 
 
 <%!
+// 선언부
 int num1 = 0;
 int num2 = 0;
 int max = 0;
 int min = 1;
 int rem = 0;
 
+
+// GCD 메서드 생성
 public int GCD(int num1, int num2) {
 	if (num1>num2) {
 		max = num1;
@@ -29,6 +32,7 @@ public int GCD(int num1, int num2) {
 		return min;
 }
 
+// LCM 메서드 생성
 public int LCM(int num1, int num2) {
 	if (num1>num2) {
 		max = num1;
@@ -69,6 +73,7 @@ public int LCM(int num1, int num2) {
 <title>Insert title here</title>
 </head>
 <body>
+	<"최대공약소 최소공배수 구하는 사이트">
 	<h2> 최대공약수 : <%=GCD(num1,num2)%>  </h2>
 	<h2> 최소공배수 : <%=LCM(num1,num2)%>  </h2>
 </body>
