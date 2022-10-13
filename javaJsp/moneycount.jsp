@@ -1,38 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-<%!
-int money;
-
-public int F(int money){
-	return (money/50000);	
-}
-
-public int M(int money){
-	return ((money-10000*(money/10000))/10000);	
-}
-
-public int O(int money){
-	return ((money-5000*(money/5000))/5000);	
-}
-
-public int C (int money){
-	return ((money-1000*(money/1000))/1000);	
-}
-
-
-%>
-
+	pageEncoding="UTF-8"%>
 
 <%
-	String smoney = request.getParameter("Numin");
-	if (smoney!=null && smoney.equals("") == false) {
-		money = Integer.parseInt(smoney);	
+int num = 0;
+int ovalu = 0;
+int total = 0;
+int[] money = { 50000, 10000, 5000, 1000 };
+int[] result = new int[4];
+String snum = request.getParameter("num");
+if (snum != null && snum.equals("") == false) {
+	num = Integer.parseInt(snum);
+	ovalu = num;
+	
+	for (int i = 0; i < money.length; i++) {
+		result[i] += num / money[i];
+		num %= money[i];
+		total += result[i]; //총 지폐 개수
 	}
-
+	
+}
 %>
-
-
 
 
 <!DOCTYPE html>
@@ -42,36 +29,23 @@ public int C (int money){
 <title>Insert title here</title>
 </head>
 <body>
-	<"최소 지폐 수 계산">
-</body>	
+	<h2>최소 지폐 수 계산</h2>
 
-	<form action="moneycount.jsp" method = "get">
-		숫자 입력 : <input type = "text" name = "Numin" /><br />
-		<input type="submit" value = "submit" />
+
+	<form action="moneycount.jsp" method="get">
+		금액입력 : <input type="text" name="num"><br />
 	</form>
-	
-	<%
-	int money;
-	
-	
-	while(0 < money) {
-	
-		int tmoney = (money / 1000) * 1000;
-		int[] array = { 50000, 10000, 5000, 1000 };
 
-		for (int t : array) {
-			int c = tmoney/t;
-			if (0 < c)
-				System.out.printf("%5d원 * %d장 = %d원\n", t, c, t*c);
-			else
-				System.out.printf("%5d원\n", t);
-			
-			tmoney -= (t * c);
-		}
-		System.out.println("-".repeat(25));
+	<%
+	out.println("<br/>"+ ovalu + "원<br/><br/>");
+	for (int j = 0; j < result.length; j++) {
+		out.println(money[j]+"원 " + result[j] +"장<br />"  );	
 	}
-	System.out.println("Good Bye!!!");	
+		
+		out.println("<br />"+"총 " + total +" 장");
+	
 	%>
 
 
+</body>
 </html>
